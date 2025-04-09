@@ -15,11 +15,10 @@ from .const import DOMAIN, CONF_MA_INSTANCE, DEFAULT_NAME
 
 _LOGGER = logging.getLogger(__name__)
 
-async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str, Any]:
-    """Validate the user input allows us to connect."""
-    # Check if Music Assistant is installed and available
+async def validate_input(hass: HomeAssistant):
     if "mass" not in hass.data:
-        raise CannotConnect("Music Assistant is not installed or configured")
+        raise CannotConnect  # or make a new custom exception like MusicAssistantNotAvailable
+
     
     # Return validated data
     return {"title": DEFAULT_NAME}
@@ -30,36 +29,26 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
-    async def async_step_user(
-        self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
-        """Handle the initial step."""
-        errors = {}
+    async def async_step_user(self, user_input: dict | None = None):
+    errors = {}
 
-        if user_input is not None:
-            try:
-                info = await validate_input(self.hass, user_input)
-                
-                # Check if the integration is already configured
-                await self.async_set_unique_id(DOMAIN)
-                self._abort_if_unique_id_configured()
-                
-                return self.async_create_entry(title=info["title"], data=user_input)
-            except CannotConnect:
-                errors["base"] = "cannot_connect"
-            except Exception:  # pylint: disable=broad-except
-                _LOGGER.exception("Unexpected exception")
-                errors["base"] = "unknown"
+    if user_input is not None:
+        try:
+            await validate_input(self.hass)
+        except CannotConnect:
+            errors["base"] = "cannot_connect"
+        except Exception:
+            _LOGGER.exception("Unexpected exception")
+            errors["base"] = "unknown"
+        else:
+            return self.async_create_entry(title="Music Assistant Spotify", data={})
 
-        return self.async_show_form(
-            step_id="user",
-            data_schema=vol.Schema({
-                vol.Required("host", default="your.public.ip.here"): str,
-                vol.Required("port", default=8095): int,
-                vol.Optional("ssl", default=False): bool,
-            }),
-            errors=errors,
-        )
+    return self.async_show_form(
+        step_id="user",
+        data_schema=vol.Schema({}),  # no fields needed
+        errors=errors,
+    )
+
 
 
 
