@@ -1,0 +1,2 @@
+# Music Assistant Spotify Lovelace
+ 
