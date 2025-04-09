@@ -1,13 +1,12 @@
 {
-    "domain": "ma-spotify-lovelace",
+    "domain": "ma_spotify_lovelace",
     "name": "Music Assistant Spotify Lovelace",
-    "version": "1.0.0",
-    "config_flow": true,
-    "documentation": "https://github.com/thatwebagency/ma-spotify-lovelace",
-    "issue_tracker": "https://github.com/thatwebagency/ma-spotify-lovelace/issues",
-    "requirements": [],
-    "dependencies": [],
     "codeowners": ["@thatwebagency"],
-    "auth_mandatory": false
+    "config_flow": true,
+    "dependencies": ["music_assistant"],
+    "documentation": "https://github.com/thatwebagency/ma_spotify_lovelace",
+    "iot_class": "local_push",
+    "issue_tracker": "https://github.com/thatwebagency/ma_spotify_lovelace/issues",
+    "requirements": [],
+    "version": "1.0.0"
   }
-  

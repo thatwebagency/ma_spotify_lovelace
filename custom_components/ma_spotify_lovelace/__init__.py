@@ -35,7 +35,7 @@ SERVICE_PLAY_SPOTIFY_SCHEMA = vol.Schema({
 SERVICE_CONTROL_SPEAKER_SCHEMA = vol.Schema({
     vol.Required("speaker_id"): cv.string,
     vol.Required("command"): cv.string,
-    vol.Optional("value"): vol.Any(cv.string, cv.number),
+    vol.Optional("value"): vol.Any(cv.string, cv.positive_float),  # Changed cv.number to cv.positive_float
 })
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
