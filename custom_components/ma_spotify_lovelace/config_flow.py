@@ -18,9 +18,6 @@ _LOGGER = logging.getLogger(__name__)
 async def validate_input(hass: HomeAssistant):
     if "mass" not in hass.data:
         raise CannotConnect  # or make a new custom exception like MusicAssistantNotAvailable
-
-    
-    # Return validated data
     return {"title": DEFAULT_NAME}
 
 
@@ -48,9 +45,6 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema({}),  # no fields needed
             errors=errors,
         )
-
-
-
 
 class CannotConnect(HomeAssistantError):
     """Error to indicate we cannot connect."""
