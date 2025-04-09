@@ -30,24 +30,24 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     async def async_step_user(self, user_input: dict | None = None):
-    errors = {}
+        errors = {}
 
-    if user_input is not None:
-        try:
-            await validate_input(self.hass)
-        except CannotConnect:
-            errors["base"] = "cannot_connect"
-        except Exception:
-            _LOGGER.exception("Unexpected exception")
-            errors["base"] = "unknown"
-        else:
-            return self.async_create_entry(title="Music Assistant Spotify", data={})
+        if user_input is not None:
+            try:
+                await validate_input(self.hass)
+            except CannotConnect:
+                errors["base"] = "cannot_connect"
+            except Exception:
+                _LOGGER.exception("Unexpected exception")
+                errors["base"] = "unknown"
+            else:
+                return self.async_create_entry(title="Music Assistant Spotify", data={})
 
-    return self.async_show_form(
-        step_id="user",
-        data_schema=vol.Schema({}),  # no fields needed
-        errors=errors,
-    )
+        return self.async_show_form(
+            step_id="user",
+            data_schema=vol.Schema({}),  # no fields needed
+            errors=errors,
+        )
 
 
 
