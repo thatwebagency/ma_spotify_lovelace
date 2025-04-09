@@ -1,0 +1,12 @@
+{
+    "domain": "ma_spotify_lovelace",
+    "name": "Music Assistant Spotify Lovelace",
+    "codeowners": ["@thatwebagency"],
+    "config_flow": true,
+    "dependencies": ["music_assistant"],
+    "documentation": "https://github.com/thatwebagency/ma_spotify_lovelace",
+    "iot_class": "local_push",
+    "issue_tracker": "https://github.com/thatwebagency/ma_spotify_lovelace/issues",
+    "requirements": [],
+    "version": "0.1.0"
+  }

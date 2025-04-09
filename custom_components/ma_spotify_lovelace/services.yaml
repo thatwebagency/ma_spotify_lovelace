@@ -1,0 +1,66 @@
+play_spotify:
+  name: Play Spotify Content
+  description: Search Spotify for content and play it on a Music Assistant speaker
+  fields:
+    query:
+      name: Search Query
+      description: The content to search for
+      required: true
+      example: "Billie Eilish - Bad Guy"
+      selector:
+        text:
+    speaker_id:
+      name: Speaker ID
+      description: The ID of the speaker to play on
+      required: true
+      example: "living_room_speaker"
+      selector:
+        text:
+    content_type:
+      name: Content Type
+      description: The type of content to search for
+      required: false
+      default: "track"
+      example: "track"
+      selector:
+        select:
+          options:
+            - "track"
+            - "album"
+            - "artist"
+            - "playlist"
+
+control_speaker:
+  name: Control Speaker
+  description: Control a Music Assistant speaker
+  fields:
+    speaker_id:
+      name: Speaker ID
+      description: The ID of the speaker to control
+      required: true
+      example: "living_room_speaker"
+      selector:
+        text:
+    command:
+      name: Command
+      description: The command to execute
+      required: true
+      example: "play"
+      selector:
+        select:
+          options:
+            - "play"
+            - "pause"
+            - "stop"
+            - "volume_set"
+            - "volume_up"
+            - "volume_down"
+            - "next_track"
+            - "previous_track"
+    value:
+      name: Value
+      description: Optional value for the command (e.g., volume level)
+      required: false
+      example: "0.5"
+      selector:
+        text:
