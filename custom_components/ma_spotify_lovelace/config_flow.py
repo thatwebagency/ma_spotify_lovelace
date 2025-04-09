@@ -53,9 +53,14 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema({}),  # Empty schema, no configuration needed
+            data_schema=vol.Schema({
+                vol.Required("host", default="your.public.ip.here"): str,
+                vol.Required("port", default=8095): int,
+                vol.Optional("ssl", default=False): bool,
+            }),
             errors=errors,
         )
+
 
 
 class CannotConnect(HomeAssistantError):
