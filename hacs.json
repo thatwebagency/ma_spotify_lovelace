@@ -1,0 +1,8 @@
+{
+    "name": "Music Assistant Spotify Lovelace",
+    "render_readme": true,
+    "domain": "ma_spotify_lovelace",
+    "homeassistant": "2023.9.0",
+    "persistent_directory": "custom_components",
+    "country": "ALL"
+  }
